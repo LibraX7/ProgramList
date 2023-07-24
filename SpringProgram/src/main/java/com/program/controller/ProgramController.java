@@ -18,6 +18,7 @@ public class ProgramController {
     @PostMapping("/add/program")
     public Result save(@RequestBody Program program) {
         boolean flag = programService.save(program);
+        System.out.println("123");
         return new Result("00000",flag?"请求正常":"请求失败");
 
     }
