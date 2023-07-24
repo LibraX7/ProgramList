@@ -1,0 +1,30 @@
+Appenders:
+  Console:
+    name: CONSOLE
+    target: SYSTEM_OUT
+    PatternLayout:
+      pattern:
+  RollingFile:
+    - name: ROLLING_FILE
+      ignoreExceptions: false
+      fileName: ./logs/hhmt-cpa.log
+      filePattern:
+      PatternLayout:
+        pattern:
+      Policies:
+        SizeBasedTriggeringPolicy:
+          size:
+      DefaultRolloverStrategy:
+        max: 1000
+Loggers:
+  Root:
+    level: info
+    AppenderRef:
+      - ref: CONSOLE
+  Logger:
+    - name: com.program.controller
+      additivity: false
+      level: info
+      AppenderRef:
+        - ref: CONSOLE
+        - ref: ROLLING_FILE

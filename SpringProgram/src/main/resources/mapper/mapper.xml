@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.program.dao.ProgramDao">
+    <insert id="save" >
+        insert into programlist values (null,#{type},#{num},#{view},#{name},#{actorlist})
+    </insert>
+    <update id="update">
+        update programlist set id=#{id},type=#{type},num=#{num},view=#{view},name=#{name},actorlist=#{actorlist} where name = #{name}
+    </update>
+    <delete id="delete">
+        delete from programlist where id = #{id}
+    </delete>
+    <select id="getByID" resultType="com.program.domain.Program">
+        select * from programlist
+     <where>
+    <if test="name != null ">
+         name like concat("%",#{name},"%")
+    </if>
+    <if test="num != null">
+         and num = #{num}
+    </if>
+    <if test="type != null and type!=''">
+         and type like #{type}
+    </if>
+            </where>
+    </select>
+    <select id="getALL" resultType="com.program.domain.Program">
+        select * from programlist
+    </select>
+
+</mapper>
